@@ -1,0 +1,22 @@
+{
+  "name": "project-team-crud",
+  "version": "1.0.0",
+  "description": "API NodeJs permettant de gérer une liste de prohets avec les équipes pour chaque projet",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Digitall4you/project-team-crud.git"
+  },
+  "author": "Alindrianja",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Digitall4you/project-team-crud/issues"
+  },
+  "homepage": "https://github.com/Digitall4you/project-team-crud#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
