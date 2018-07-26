@@ -4,12 +4,12 @@ import memberController from '../controllers/member.controller';
 
 const router = express.Router();
 
-    router.route('/member')
+    router.route('/')
         .get(memberController.getAllMembers)
         .post(memberController.addMember)
         .put(memberController.updateMember);
         
-    router.route('/member/:id')
+    router.route('/:id')
         .get(memberController.getMemberById)
         .delete(memberController.deleteMember);
         

@@ -21,7 +21,7 @@ class App{
     }
 
     initRoutes() { 
-        this.app.use(routes);
+        this.app.use('/api',routes);// pour différencier les url front et back
     }
 }
 

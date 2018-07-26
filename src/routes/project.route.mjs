@@ -4,12 +4,12 @@ import projectController from '../controllers/project.controller';
 
 const router = express.Router();
 
-    router.route('/project')
+    router.route('/')
         .post(projectController.addProject)
         .put(projectController.updateProject)
         .get(projectController.getAllProjects);
         
-    router.route('/project/:id')
+    router.route('/:id')
         .get(projectController.getProjectById)
         .delete(projectController.deleteProject);
 

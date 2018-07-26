@@ -6,8 +6,8 @@ import projectRoutes from './project.route';
 
 const router = express.Router();
 
-router.get('/api-status', (req, res) => res.json({ status:'API IS OK'}));
-router.use(memberRoutes);
-router.use(projectRoutes);
+router.get('/api-status', (req, res) => res.json({ status:'Test API'}));
+router.use('/member',memberRoutes);
+router.use('/project',projectRoutes);
 
 export default router;   
