@@ -1,18 +1,17 @@
-import express from 'express';
 import mongoose from 'mongoose';
-import bodyParser from 'body-parser';
 
-import Member from './Member.model';
-import Project from './Project.model';
+import server from './configs/express.config';
+
+import Member from './models/Member.model';
+import Project from './models/Project.model';
 
 mongoose.connect('mongodb://localhost/');
 
 mongoose.connection.on('connected', () => {
+    
     console.log('connection to database established');
-
-    const app = express();
-    app.use(bodyParser.json());
-    app.use(bodyParser.urlencoded({ extended : true }));
+    
+    const app = server.init();
 
     app.listen(3000, () => {
         console.log('app started, listening on port 3000');
@@ -37,7 +36,6 @@ mongoose.connection.on('connected', () => {
     
     //addMember
     app.post('/member', (req, res) => {
-        console.log('POST', req.body);
         //Ajouter de membre dans la bd
         const member = req.body;
         Member.create(member).then(() => {
@@ -67,7 +65,6 @@ mongoose.connection.on('connected', () => {
     //Projects
     //addProject
     app.post('/project', (req, res) => {
-        console.log('POST', req.body);
         //création du projet dans la bd
         const project = req.body;
         Project.create(project).then(() => {
@@ -93,7 +90,7 @@ mongoose.connection.on('connected', () => {
     });
     //getProjectById
     app.get('/project/:id', (req, res) => {
-        //Selectionner un membre
+        //Selectionner un projet
         Project.find({_id: req.params.id}).then(project => {
             res.json(project);
         });
