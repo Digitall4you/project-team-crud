@@ -4,8 +4,6 @@ import memberRoutes from './member.route';
 
 import projectRoutes from './project.route';
 
-
-
 const router = express.Router();
 
 router.get('/api-status', (req, res) => res.json({ status:'API IS OK'}));

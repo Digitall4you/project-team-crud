@@ -1,8 +1,17 @@
 import express from 'express';
 
-import Project from '../models/Project.model';
+import projectController from '../controllers/project.controller';
 
 const router = express.Router();
+
+    router.route('/project')
+        .post(projectController.addProject)
+        .put(projectController.updateProject)
+        .get(projectController.getAllProjects);
+        
+    router.route('/project/:id')
+        .get(projectController.getProjectById)
+        .delete(projectController.deleteProject);
 
         /*/addProject
         app.post('/project', (req, res) => {
@@ -24,13 +33,13 @@ const router = express.Router();
         });
         //getAllProjects
         */
-        router.route('/project')
+        /*router.route('/project')
         .get((req, res) => {
             //recuperation de tous les projets existants
             Project.find().then((projects) => {
                 res.json(projects);
             });
-        });
+        });*/
         /*getProjectById
         app.get('/project/:id', (req, res) => {
             //Selectionner un projet
@@ -46,4 +55,4 @@ const router = express.Router();
             });
         });*/
 
-export default router
+export default router;

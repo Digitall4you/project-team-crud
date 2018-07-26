@@ -1,17 +1,21 @@
 import express from 'express';
 
-import Member from '../models/Member.model';
+import memberController from '../controllers/member.controller';
 
 const router = express.Router();
 
-     //getAllMember
-        router.route('/member')
-            .get((req, res) => {
-            //recuperation de tous les membres
-                Member.find().then((members) => {
-                res.json(members);
-            });
-        });
+    router.route('/member')
+        .get(memberController.getAllMembers)
+        .post(memberController.addMember)
+        .put(memberController.updateMember);
+        
+    router.route('/member/:id')
+        .get(memberController.getMemberById)
+        .delete(memberController.deleteMember);
+        
+
+
+            //recuperation de tous les membres;
 /*
         //getMemberById
         app.get('/member/:id', (req, res) => {
