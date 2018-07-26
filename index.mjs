@@ -17,6 +17,7 @@ mongoose.connection.on('connected', () => {
         console.log('app started, listening on port 3000');
     });
 
+    //getAllMember
     app.get('/member', (req, res) => {
         //recuperation de tous les membres
         Member.find().then((members) => {
@@ -24,23 +25,43 @@ mongoose.connection.on('connected', () => {
         });
     });
 
+    //getMemberById
     app.get('/member/:id', (req, res) => {
-        //Sélectionne un membre
-        console.log('Get member by id, params:', req.params.id);
+        //Selectionner un membre
         Member.find({_id: req.params.id}).then(member => {
             res.json(member);
         });
     });
     
+    //addMember
     app.post('/member', (req, res) => {
         console.log('POST', req.body);
         //Ajouter de membre dans la bd
         const member = req.body;
         Member.create(member).then(() => {
-            console.log('membre ajouté');
+            res.json({ message : 'Membre ajouté avec succès' })
         });
     });
-});
+
+    //updateMember
+    app.put('/member', (req, res) => {
+        const member = req.body;
+        Member.findById(member._id).then(memberdb => {
+            Object.assign(memberdb,member);
+            memberdb.save().then(() => {
+                res.json({message: 'modifié avec succès'});
+            });
+        });
+    });
+
+    //deleteMember
+    app.delete('/member:id', (req ,res) => {
+        const memberId = req.params.id;
+        Member.deleteOne({ _id:memberId}).then(() => {
+            res.json({ message: 'supprimé avec succes'});
+        });
+    });
+}); 
 
 mongoose.connection.on('error', () => {
     throw new Error('unable to establish connection');

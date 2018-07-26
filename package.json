@@ -4,7 +4,8 @@
   "description": "API NodeJs permettant de gérer une liste de prohets avec les équipes pour chaque projet",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": " nodemon --experimental-modules index.mjs"
   },
   "repository": {
     "type": "git",
@@ -21,5 +22,8 @@
     "express": "^4.16.3",
     "mongodb": "^3.1.1",
     "mongoose": "^5.2.5"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.3"
   }
 }
