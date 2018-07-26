@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 
 import Member from './Member.model';
+import Project from './Project.model';
 
 mongoose.connect('mongodb://localhost/');
 
@@ -17,6 +18,7 @@ mongoose.connection.on('connected', () => {
         console.log('app started, listening on port 3000');
     });
 
+    //Members
     //getAllMember
     app.get('/member', (req, res) => {
         //recuperation de tous les membres
@@ -39,7 +41,7 @@ mongoose.connection.on('connected', () => {
         //Ajouter de membre dans la bd
         const member = req.body;
         Member.create(member).then(() => {
-            res.json({ message : 'Membre ajouté avec succès' })
+            res.json({ message : 'Membre ajoute avec succes' })
         });
     });
 
@@ -47,9 +49,9 @@ mongoose.connection.on('connected', () => {
     app.put('/member', (req, res) => {
         const member = req.body;
         Member.findById(member._id).then(memberdb => {
-            Object.assign(memberdb,member);
+            Object.assign(memberdb, member);
             memberdb.save().then(() => {
-                res.json({message: 'modifié avec succès'});
+                res.json({message: 'modifie avec succes'});
             });
         });
     });
@@ -58,9 +60,52 @@ mongoose.connection.on('connected', () => {
     app.delete('/member/:id', (req ,res) => {
         const memberId = req.params.id;
         Member.deleteOne({ _id:memberId}).then(() => {
-            res.json({ message: 'supprimé avec succes'});
+            res.json({ message: 'supprime avec succes'});
         });
     });
+
+    //Projects
+    //addProject
+    app.post('/project', (req, res) => {
+        console.log('POST', req.body);
+        //création du projet dans la bd
+        const project = req.body;
+        Project.create(project).then(() => {
+            res.json({ message : 'Projet ajoute avec succes' })
+        });
+    });     
+    //updateProject
+    app.put('/project', (req, res) => {
+        const project = req.body;
+        Project.findById(project._id).then(projectdb => {
+            Object.assign(projectdb, project);
+            projectdb.save().then(() => {
+                res.json({message: 'Projet modifie avec succes'});
+            });
+        });
+    });
+    //getAllProjects
+    app.get('/project', (req, res) => {
+        //recuperation de tous les projets existants
+        Project.find().then((projects) => {
+            res.json(projects);
+        });
+    });
+    //getProjectById
+    app.get('/project/:id', (req, res) => {
+        //Selectionner un membre
+        Project.find({_id: req.params.id}).then(project => {
+            res.json(project);
+        });
+    });
+    //deleteProject
+    app.delete('/project/:id', (req ,res) => {
+        const projectId = req.params.id;
+        Project.deleteOne({ _id: projectId}).then(() => {
+            res.json({ message: 'projet supprime avec succes'});
+        });
+    });
+
 }); 
 
 mongoose.connection.on('error', () => {
