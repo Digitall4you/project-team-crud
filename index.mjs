@@ -55,7 +55,7 @@ mongoose.connection.on('connected', () => {
     });
 
     //deleteMember
-    app.delete('/member:id', (req ,res) => {
+    app.delete('/member/:id', (req ,res) => {
         const memberId = req.params.id;
         Member.deleteOne({ _id:memberId}).then(() => {
             res.json({ message: 'supprimé avec succes'});
